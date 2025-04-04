@@ -3,10 +3,13 @@ import cv2
 import numpy as np
 from flask import Flask, request, jsonify
 import easyocr
-import backend.util as util
+import util as util
+from flask_cors import CORS 
 
 # Flask App
 app = Flask(__name__)
+
+CORS(app)
 
 # Load model once
 model_cfg_path = os.path.join('model', 'cfg', 'darknet-yolov3.cfg')

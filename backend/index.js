@@ -2,6 +2,7 @@ const express =   require('express');
 const cors =   require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const plateRoutes = require('./routes/plateRoutes');
 
 const app =  express();
 
@@ -9,7 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 
-const ML_API_URL = 'http://127.0.0.1:5000/detect';
+app.use('/api', plateRoutes); 
+
+mongoose.connect('mongodb://localhost:27017/carpark', 
+    //{ useNewUrlParser: true, useUnifiedTopology: true }
+    )
+  .then(() => console.log('MongoDB connected'))
+  .catch((error) => console.error('MongoDB connection error:', error));
 
 
 const port  = process.env.PORT || 5001;
